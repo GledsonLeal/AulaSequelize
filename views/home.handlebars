@@ -1,0 +1,8 @@
+<h1>Lista de Alunos: </h1>
+
+{{#each alunos}}
+    <p>Nome Completo: {{dataValues.nome}}{{dataValues.sobreNome}}</p>
+    <p>E-mail: {{dataValues.email}}</p>
+    <p>Data de cadastro: {{#formatDate dataValues.createAt}}{{/formatDate}}</p>
+    <hr>
+{{/each}}
