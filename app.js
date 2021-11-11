@@ -22,6 +22,7 @@ app.get('/',(req, res)=>{
         res.render('home',{alunos: alunos})
     })
 })
+//cadastro
 app.get("/cadastro", (req, res)=>{
     res.render('cadastroAluno')
 })
@@ -34,8 +35,39 @@ app.post("/criar_cadastro", (req, res)=>{
         res.redirect('/')
     }).catch((erro)=>{
         console.log(`erro ao inserir aluno: ${erro}`)
+        res.redirect('/')
     })
 })
+//Editar
+app.get('/editar/:id',(req, res)=>{
+    id=req.params.id
+    res.render('editar')
+})
+app.post('/editar', (req, res)=>{
+    Aluno.update({
+        nome: req.body.nome,
+        sobreNome: req.body.sobreNome,
+        email: req.body.email
+    },{
+        where: {id: id},
+    }).then(()=>{
+        res.redirect('/')
+    }).catch((erro)=>{
+        console.log(`Erro ao editar: ${erro}`)
+    })
+})
+//exclusão
+app.get('/deletar/:id', (req, res)=>{
+    Aluno.destroy({
+        where: {'id': req.params.id}
+    }).then(()=>{
+        res.redirect('/')
+        console.log('registro excluído com sucesso!')
+    }).catch((erro)=>{
+        console.log(`erro ao excluir registro: ${erro}`)
+    })
+})
+
 
 app.listen(port, ()=>{
     console.log(`servidor rodando na url http://localhost${port}`)

@@ -1,8 +1,11 @@
 <h1>Lista de Alunos: </h1>
-
+<a href= "/cadastro"><button>Cadastrar</button></a><br>
+<hr>
 {{#each alunos}}
     <p>Nome Completo: {{dataValues.nome}}{{dataValues.sobreNome}}</p>
     <p>E-mail: {{dataValues.email}}</p>
     <p>Data de cadastro: {{#formatDate dataValues.createAt}}{{/formatDate}}</p>
+    <a href= "/deletar/{{dataValues.id}}"><button>Deletar</button></a>
+    <a href= "/editar/{{dataValues.id}}"><button>Editar</button></a>
     <hr>
 {{/each}}
